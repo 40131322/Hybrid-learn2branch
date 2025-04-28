@@ -5,3 +5,4 @@ test_results/
 data
 eval_results/
 /.tmp.driveupload
+PySCIPOpt/
