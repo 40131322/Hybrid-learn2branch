@@ -1,0 +1,32 @@
+@echo off
+setlocal enabledelayedexpansion
+
+:: === Config ===
+set PROBLEM=facilities
+set SEED=0
+set GPU=-1
+
+echo.
+echo ==== Step 1: Train GCNN teacher (baseline_torch using 08) ====
+python 08_train_gnn_torch.py %PROBLEM% --model baseline_torch --seed %SEED% --gpu %GPU% --data_path data/samples
+
+
+echo.
+echo ==== Step 2: FILM with pretrained GCNN (film-pre) ====
+python 03_train_hybrid.py %PROBLEM% --model film --no_e2e --seed %SEED% --gpu %GPU%
+
+echo.
+echo ==== Step 3: FILM end-to-end ====
+python 03_train_hybrid.py %PROBLEM% --model film --seed %SEED% --gpu %GPU%
+
+echo.
+echo ==== Step 4: FILM end-to-end + knowledge distillation ====
+python 03_train_hybrid.py %PROBLEM% --model film --distilled --seed %SEED% --gpu %GPU%
+
+echo.
+echo ==== Step 5: FILM end-to-end + KD + auxiliary task (ED) ====
+python 03_train_hybrid.py %PROBLEM% --model film --distilled --at ED --beta_at 0.1 --l2 0.001 --seed %SEED% --gpu %GPU%
+
+echo.
+echo ==== All FILM model variants for %PROBLEM% completed. ====
+pause

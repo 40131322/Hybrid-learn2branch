@@ -1,0 +1,13 @@
+Cython==0.29.13
+dataclasses==0.8
+decorator==5.1.1
+networkx==2.4
+numpy==1.18.1
+Pillow==8.4.0
+PySCIPOpt @ file:///D:/GitHub/Hybrid-learn2branch/PySCIPOpt
+scikit-learn==0.20.2
+scipy==1.5.2
+torch==1.9.1+cu102
+torchaudio==0.9.1
+torchvision==0.10.1+cu102
+typing_extensions==4.1.1
